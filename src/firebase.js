@@ -1,5 +1,8 @@
-import firebase from 'firebase'
-import keys from './keys/firebaseAccount.json';
+import firebase from 'firebase/app';
+import 'firebase/database';
+
+import keys from './keys/firebase-config.json';
+
 const config = {
     apiKey: keys.apiKey,
     authDomain: keys.authDomain,
