@@ -1,6 +1,8 @@
 {
   "name": "control-map-react",
   "version": "0.1.0",
+  "description":"Mapa interactivo en ReactJS + Firebase, con la libreria de Leaflet adaptada para su uso en React",
+  "author":"Nicolás Vásquez Robledo",
   "private": true,
   "dependencies": {
     "firebase": "^5.0.4",
