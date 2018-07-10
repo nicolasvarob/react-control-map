@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/database';
 
 import keys from './keys/firebase-config.json';

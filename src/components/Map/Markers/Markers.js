@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import firebase from '../../../firebase';
-import Marker from './Marker';
+import Marker from './Marker/Marker';
 
 
 class Markers extends Component {
     state = {
-        markers: []
+        markers: [],
+        lastSelectedMarker: null
     }
 
     //Pinta marcadores en mapa
     _getHomes = (data) => {
-
         const homes = data.val();
         Object.keys(homes).map(key => {
             const single = homes[key];
@@ -51,6 +51,11 @@ class Markers extends Component {
         });
     }
 
+    //Recibe que marker fue clickeado por última vez
+    _onChildClicked = (childKey) => {
+        this.setState({lastSelectedMarker: childKey});
+    }
+
     _errData = (err) => {
         console.log('error');
         console.log(err);
@@ -60,6 +65,7 @@ class Markers extends Component {
         const database = firebase.database();
         const homesRef = database.ref('homes');
         homesRef.on('value', this._getHomes, this._errData);
+        console.log('mount')
     }
 
     componentDidUpdate(prevProps) {
@@ -76,18 +82,8 @@ class Markers extends Component {
                 const status = marker.status;
                 const address = marker.address;
 
-                /* const prevItem = this.state.markers.filter(function(item){
-                    return item.homeId === key;
-                });
-
-
-                if(prevItem[0].estado ===){
-
-                } */
-
-
                 return (
-                    <Marker key={key} lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
+                    <Marker key={key} lastSelectedMarker={this.state.lastSelectedMarker} onClick={this._onChildClicked} lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
                 );
             });
         }

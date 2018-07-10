@@ -7,31 +7,22 @@ class Marker extends Component {
     constructor(){
         super();
         this.state = {
-            active: false
+            selected: false
         }
         this.marker = null;
     }
     
 
     _onClick = (e) => {
-       
-        //Cambia el icono dependiendo de la actividad en el click
-        //Define si esta activo.
-        if (this.state.active) {
-            if (this.props.status === "actividad") {
-                e.target.setIcon(statusOkMarker);
-            }
-            else if (this.props.status === "inactividad") {
-                e.target.setIcon(defaultMarker);
-            }
-            else {
-                console.log('no esta definido');
-                e.target.setIcon(defaultMarker);
-            }
-            this.setState({ active: false });
-        } else {
-            e.target.setIcon(activeMarker);
-            this.setState({ active: true });
+        //Cambia el estado del marcador cuando se hace click
+        //Si ya esta seleccionado.
+        if (this.state.selected) {
+            return this.setState({selected:false});
+        } 
+        //Si no ha sido seleccionado
+        else {
+            this.props.onClick(this.props.homeId);
+            return this.setState({ selected: true });
         }
     }
 
@@ -59,19 +50,17 @@ class Marker extends Component {
 
     componentDidUpdate(prevProps) {
         const changeStatusMarker = () => {
-            if(this.props.status === prevProps.status){
-                return false;
+            if(this.props.homeId === this.props.lastSelectedMarker){
+                this.marker.setIcon(activeMarker);
             } else {
-                if(this.props.status === "actividad"){
-                    this.marker = this.marker.setIcon(statusOkMarker);
-                }
-                else{
-                    this.marker = this.marker.setIcon(defaultMarker);                    
-                }
-                return true;
+                if(this.state.selected) this.setState({selected:false});
+                if(this.props.status === prevProps.status && this.state.selected) return console.log('same status');
+                if(this.props.status === "actividad") return this.marker.setIcon(statusOkMarker);
+                else if (this.props.status === "inactividad") return this.marker.setIcon(defaultMarker);
+                else return this.marker.setIcon(defaultMarker);
             }
         }
-        changeStatusMarker()
+        changeStatusMarker();
     }
 
     render() {

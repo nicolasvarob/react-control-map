@@ -1,8 +1,8 @@
 import L from 'leaflet';
-import { markerSvgURI } from '../../SVG/markerIcon';
+import { markerSvgURI } from '../../../SVG/markerIcon';
 
 const iconSize = [50, 78];
-const iconAnchor = [30, 60];
+const iconAnchor = [30, 70];
 const popupAnchor = [1, -34];
 
 export const activeMarker = L.icon({
