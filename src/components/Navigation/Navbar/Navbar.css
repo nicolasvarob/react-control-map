@@ -1,0 +1,13 @@
+header{
+    position:absolute;
+    z-index: 1100;
+    height:50px;
+}
+nav{
+    position:relative;
+    align-items: center;
+    justify-content: middle;
+}
+li{
+    list-style: none;
+}
