@@ -1,0 +1,1 @@
+export const FETCH_PATROLS = 'FETCH_PATROLS';

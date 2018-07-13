@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import firebase from '../../../../firebase';
+
 import ListItem from './ListItem';
+import { fetchPatrols } from '../../../../actions/dataAction';
 
 class ListItems extends Component {
 
@@ -9,6 +12,7 @@ class ListItems extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchPatrols()
         //Firebase sacar valores de homes
         const database = firebase.database();
         const patrolsRef = database.ref('patrols');
@@ -17,6 +21,7 @@ class ListItems extends Component {
             console.log('Error');
             console.log(err);
         }
+
 
     }
 
@@ -35,7 +40,6 @@ class ListItems extends Component {
                 const status = singlePatrol.status;
                 const timestamp = singlePatrol.timestamp;
                 const patrolInfo = { address: address, status: status, timestamp: timestamp, key: patrol.key }
-                console.log(patrolInfo);
                 this.setState((prevState) => {
                     return {
                         items: [...prevState.items, patrolInfo]
@@ -66,4 +70,8 @@ class ListItems extends Component {
     }
 }
 
-export default ListItems;
+const mapStateToProps = state => ({
+    test: state.patrols.patrols
+});
+
+export default connect(mapStateToProps, { fetchPatrols })(ListItems);
