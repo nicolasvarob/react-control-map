@@ -21,10 +21,12 @@ class ListItems extends Component {
         //Arreglar multiplicación del estado
 
         let items = this.props.items;
+        items.sort()
+        items.slice(0,4);
 
         let itemList;
         if (items) {
-            itemList = this.props.items.map(item => {
+            itemList = items.map(item => {
                 return <ListItem key={item.key} address={item.address} timestamp={item.timestamp} status={item.status} />
             }); 
         }
