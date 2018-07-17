@@ -3,10 +3,11 @@ import { FETCH_PATROLS } from './types';
 import { patrolsRef, homesRef } from '../firebase';
 
 export const fetchPatrols = () => async dispatch => {
-    patrolsRef.limitToLast(10).on("value", snapshot => {
+    patrolsRef.limitToLast(10).on("child_added", snapshot => {
         if (snapshot.val() == null) {
             return false;
         }
+        console.log(snapshot.val());
         snapshot.forEach(patrol => {
             const singlePatrol = patrol.val();
             homesRef.child(singlePatrol.homeId).once('value', snap => {

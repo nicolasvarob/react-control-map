@@ -21,7 +21,6 @@ class ListItems extends Component {
         //Arreglar multiplicación del estado
 
         let items = this.props.items;
-        items.sort(function(a,b){return b.timestamp - a.timestamp})
 
         let itemList;
         if (items) {
