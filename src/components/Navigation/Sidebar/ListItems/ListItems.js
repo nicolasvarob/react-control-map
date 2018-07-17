@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import firebase from '../../../../firebase';
 
 import ListItem from './ListItem';
 import { fetchPatrols } from '../../../../actions/dataAction';
@@ -10,53 +10,28 @@ class ListItems extends Component {
     state = {
         items: []
     }
-
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchPatrols()
-        //Firebase sacar valores de homes
-        const database = firebase.database();
-        const patrolsRef = database.ref('patrols');
-        patrolsRef.orderByKey().limitToLast(10).on('value', this.patrolReport, errData);
-        function errData(err) {
-            console.log('Error');
-            console.log(err);
-        }
-
-
     }
-
-    patrolReport = (snapshot) => {
-        const patrols = snapshot.val();
-        if (patrols == null) {
-            return false;
-        }
-        const database = firebase.database();
-        const homesRef = database.ref('homes');
-        snapshot.forEach(patrol => {
-            const singlePatrol = patrol.val();
-            homesRef.child(singlePatrol.homeId).once('value', snap => {
-                const homeSingle = snap.val();
-                const address = homeSingle.address;
-                const status = singlePatrol.status;
-                const timestamp = singlePatrol.timestamp;
-                const patrolInfo = { address: address, status: status, timestamp: timestamp, key: patrol.key }
-                this.setState((prevState) => {
-                    return {
-                        items: [...prevState.items, patrolInfo]
-                    }
-                });
-            }, errData);
-        });
-        function errData(err) {
-            console.log('Error');
-            console.log(err);
-        }
+    componentDidMount() {
     }
 
     render() {
-        const itemList = this.state.items.map(item => {
-            return <ListItem key={item.key} address={item.address} timestamp={item.timestamp} status={item.status} />
-        });
+        //TODO 
+        //Arreglar multiplicación del estado
+
+        let items = this.props.items;
+        items.sort(function(a,b){return b.timestamp - a.timestamp})
+
+        let itemList;
+        if (items) {
+            itemList = this.props.items.map(item => {
+                return <ListItem key={item.key} address={item.address} timestamp={item.timestamp} status={item.status} />
+            }); 
+        }
+        else {
+            itemList = "loading";
+        }
         return (
             <div>
                 <ul>
@@ -71,7 +46,7 @@ class ListItems extends Component {
 }
 
 const mapStateToProps = state => ({
-    test: state.patrols.patrols
+    items: state.patrols.patrols
 });
 
 export default connect(mapStateToProps, { fetchPatrols })(ListItems);

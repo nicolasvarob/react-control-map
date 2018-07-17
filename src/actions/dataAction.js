@@ -3,7 +3,7 @@ import { FETCH_PATROLS } from './types';
 import { patrolsRef, homesRef } from '../firebase';
 
 export const fetchPatrols = () => async dispatch => {
-    patrolsRef.on("value", snapshot => {
+    patrolsRef.limitToLast(10).on("value", snapshot => {
         if (snapshot.val() == null) {
             return false;
         }
@@ -23,6 +23,7 @@ export const fetchPatrols = () => async dispatch => {
                 });
             });
         });
-
-    })
+    });
 }
+
+export const fetchHomes = () => {}
