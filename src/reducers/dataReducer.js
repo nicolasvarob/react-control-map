@@ -7,14 +7,12 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case FETCH_PATROLS:
-            //TODO 
-            //Mover la logica de mutación
-            const newState = [...state.patrols, action.payload];
-            newState.sort(function (a, b) {
+            const nextState = [...state.patrols, action.payload];
+            nextState.sort(function (a, b) {
                 return b.timestamp - a.timestamp
             });
             return {
-                patrols: newState.slice(0, 10)
+                patrols: nextState.slice(0, 10)
             };
         default:
             return state;
