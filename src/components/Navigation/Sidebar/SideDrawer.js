@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ListItems from './ListItems/ListItems';
 import './SideDrawer.css';
+import { sidedrawerOpen } from '../../../actions/uiAction'
+import { connect } from 'react-redux';
 
-const sideDrawer = (props) => {
-    let drawerClasses = 'side-drawer';
-    if (props.visible){
-        drawerClasses = 'side-drawer open';
+class SideDrawer extends Component {
+    componentDidMount() {
     }
-    return (
-        <div id="side-drawer" className={drawerClasses}>
-            <ListItems />
-        </div>
-    );
+    render() {
+        let drawerClasses = 'side-drawer';
+        if (this.props.visible) {
+            drawerClasses = 'side-drawer open';
+        }
+        return(
+            <div id = "side-drawer" className = { drawerClasses } >
+                <ListItems />
+            </div>
+        );
+    }
+    
 };
 
-export default sideDrawer;
+const mapStateToProps = state => ({
+    visible: state.uistate.visible
+});
+
+export default connect(mapStateToProps, { sidedrawerOpen })(SideDrawer);

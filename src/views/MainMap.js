@@ -9,7 +9,6 @@ import { sidedrawerOpen } from '../actions/uiAction';
 
 class MainMap extends Component {
     state = {
-        sideDrawerOpen: false,
         nestedSideDrawerOpen: false
     }
 
@@ -17,21 +16,14 @@ class MainMap extends Component {
     }
 
     drawerToggleClickHandler = () => {
-        this.setState((prevState) => {
-            return { sideDrawerOpen: !prevState.sideDrawerOpen }
-        });
         this.props.sidedrawerOpen();
-<<<<<<< HEAD
-
-=======
->>>>>>> ad033ff0d0b93e24945cc5eb5dbada57ae8985a4
     };
 
     render() {
         return (
             <React.Fragment>
                 <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-                <SideDrawer visible={this.state.sideDrawerOpen} />
+                <SideDrawer />
                 <MapView lat="-33.435979" lng="-70.596415" zoom="16" />
             </React.Fragment>
         );
