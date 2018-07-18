@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import dataReducer from './dataReducer';
+import uiReducer from './uiReducer';
 
 export default combineReducers({
-    patrols:dataReducer
+    patrols:dataReducer,
+    uistate: uiReducer
 })

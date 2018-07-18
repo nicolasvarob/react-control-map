@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import MapView from '../components/Map/MapView';
 import SideDrawer from '../components/Navigation/Sidebar/SideDrawer';
+import NestedSideDrawer from '../components/Navigation/Sidebar/NestedSideDrawer';
 import Navbar from '../components/Navigation/Navbar/Navbar';
+import SideBar from '../components/Navigation/Sidebar/Sidebar';
+import { connect } from 'react-redux';
+import { sidedrawerOpen } from '../actions/uiAction';
 
 class MainMap extends Component {
     state = {
-        sideDrawerOpen: false
+        sideDrawerOpen: false,
+        nestedSideDrawerOpen: false
+    }
+
+    componentDidMount(){
     }
 
     drawerToggleClickHandler = () => {
         this.setState((prevState) => {
             return { sideDrawerOpen: !prevState.sideDrawerOpen }
         });
+        this.props.sidedrawerOpen();
+
     };
 
     render() {
@@ -25,4 +35,4 @@ class MainMap extends Component {
     }
 }
 
-export default MainMap;
+export default connect(null, { sidedrawerOpen })(MainMap);

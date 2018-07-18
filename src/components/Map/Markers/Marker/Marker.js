@@ -13,7 +13,7 @@ class Marker extends Component {
     }
     
 
-    _onClick = (e) => {
+    _onClick = () => {
         //Cambia el estado del marcador cuando se hace click
         //Si ya esta seleccionado.
         if (this.state.selected) {
@@ -50,7 +50,7 @@ class Marker extends Component {
 
     componentDidUpdate(prevProps) {
         const changeStatusMarker = () => {
-            if(this.props.homeId === this.props.lastSelectedMarker){
+            if(this.props.homeId === this.props.lastSelectedMarker && this.state.selected){
                 this.marker.setIcon(activeMarker);
             } else {
                 if(this.state.selected) this.setState({selected:false});

@@ -1,22 +1,22 @@
-.side-drawer{
+.nested-side-drawer{
     position:fixed;
-    z-index: 1000;
+    z-index: 1100;
     height:100%;
     top:0;
     right:0;
     background: #FFF;
-    width:35%;
+    width:30%;
     transform: translateX(100%);
     transition: transform 0.3s ease-in;
     box-shadow: -1px 0px 2px 1px #aaaaaa;        
 }
 
-.side-drawer.open {
+.nested-side-drawer.open {
     transform: translateX(0);
 }
 
 @media (max-width: 1200px){
-    .side-drawer{
-        width:40%;
+    .nested-side-drawer{
+        width:35%;
     }
 }

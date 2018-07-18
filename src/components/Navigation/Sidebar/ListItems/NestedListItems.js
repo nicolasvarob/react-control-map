@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ListItem from './ListItem';
-import { fetchPatrols } from '../../../../actions/dataAction';
+import { fetchHomePatrols } from '../../../../actions/dataAction';
 
-class ListItems extends Component {
+class NestedListItems extends Component {
 
     componentWillMount() {
-        this.props.fetchPatrols()
+        this.props.fetchHomePatrols()
     }
     componentDidMount() {
     }
@@ -27,7 +27,7 @@ class ListItems extends Component {
         return (
             <div>
                 <ul>
-                    <li><h2>Título</h2></li>
+                    <li><h2>Título 2</h2></li>
                 </ul>
                 <ul>
                     {itemList}
@@ -37,13 +37,13 @@ class ListItems extends Component {
     }
 }
 
-ListItems.propTypes = {
-    fetchPatrols: PropTypes.func.isRequired,
+NestedListItems.propTypes = {
+    fetchHomePatrols: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-    items: state.patrols.patrols
+    items: state.patrols.homePatrols
 });
 
-export default connect(mapStateToProps, { fetchPatrols })(ListItems);
+export default connect(mapStateToProps, { fetchHomePatrols })(NestedListItems);
