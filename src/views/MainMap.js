@@ -21,7 +21,10 @@ class MainMap extends Component {
             return { sideDrawerOpen: !prevState.sideDrawerOpen }
         });
         this.props.sidedrawerOpen();
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad033ff0d0b93e24945cc5eb5dbada57ae8985a4
     };
 
     render() {
