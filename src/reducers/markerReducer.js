@@ -1,14 +1,14 @@
-import { SIDEDRAWER_OPEN } from '../actions/types';
+import { SELECTED_MARKER } from '../actions/types';
 
 const initialState = {
-    sidedrawerToggle: false
+    selectedMarker: null
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case SIDEDRAWER_OPEN:
+        case SELECTED_MARKER:
             return {
-                sidedrawerToggle: !state.sidedrawerToggle
+                selectedMarker: action.id
             };
         default:
             return state;

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import MapView from '../components/Map/MapView';
-import SideDrawer from '../components/Navigation/Sidebar/SideDrawer';
-import NestedSideDrawer from '../components/Navigation/Sidebar/NestedSideDrawer';
 import Navbar from '../components/Navigation/Navbar/Navbar';
 import SideBar from '../components/Navigation/Sidebar/Sidebar';
 import { connect } from 'react-redux';
@@ -12,7 +10,7 @@ class MainMap extends Component {
         nestedSideDrawerOpen: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
     }
 
     drawerToggleClickHandler = () => {
@@ -23,7 +21,7 @@ class MainMap extends Component {
         return (
             <React.Fragment>
                 <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-                <SideDrawer />
+                <SideBar />
                 <MapView lat="-33.435979" lng="-70.596415" zoom="16" />
             </React.Fragment>
         );

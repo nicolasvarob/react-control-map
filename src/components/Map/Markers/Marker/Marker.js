@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import L from 'leaflet';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectedMarker } from '../../../../actions/markerAction';
 
 import { activeMarker,defaultMarker,statusOkMarker } from './allMarkers'
 
@@ -22,6 +25,7 @@ class Marker extends Component {
         //Si no ha sido seleccionado
         else {
             this.props.onClick(this.props.homeId);
+            this.props.selectedMarker(this.props.homeId);
             return this.setState({ selected: true });
         }
     }
@@ -49,12 +53,13 @@ class Marker extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log('update');
         const changeStatusMarker = () => {
             if(this.props.homeId === this.props.lastSelectedMarker && this.state.selected){
                 this.marker.setIcon(activeMarker);
             } else {
                 if(this.state.selected) this.setState({selected:false});
-                if(this.props.status === prevProps.status && this.state.selected) return console.log('same status');
+                if(this.props.status === prevProps.status && this.state.selected) return //console.log('same status');
                 if(this.props.status === "actividad") return this.marker.setIcon(statusOkMarker);
                 else if (this.props.status === "inactividad") return this.marker.setIcon(defaultMarker);
                 else return this.marker.setIcon(defaultMarker);
@@ -71,4 +76,12 @@ class Marker extends Component {
     }
 }
 
-export default Marker;
+Marker.propTypes = {
+    selectedMarker: PropTypes.string
+};
+
+const mapStateToProps = state => ({
+    selectedMarker: state.markers.selectedMarker
+});
+
+export default connect(mapStateToProps, { selectedMarker })(Marker);

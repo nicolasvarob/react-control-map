@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import ListItems from './ListItems/ListItems';
-import './SideDrawer.css';
-import { sidedrawerOpen } from '../../../actions/uiAction'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import ListItems from '../ListItems/ListItems';
+import { sidedrawerOpen } from '../../../../actions/uiAction'
+import './SideDrawer.css';
 
 class SideDrawer extends Component {
     componentDidMount() {
@@ -21,8 +23,12 @@ class SideDrawer extends Component {
     
 };
 
+SideDrawer.propTypes = {
+    visible: PropTypes.bool.isRequired
+};
+
 const mapStateToProps = state => ({
-    visible: state.uistate.visible
+    visible: state.uistate.sidedrawerToggle
 });
 
 export default connect(mapStateToProps, { sidedrawerOpen })(SideDrawer);

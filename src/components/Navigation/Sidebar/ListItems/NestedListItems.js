@@ -8,6 +8,7 @@ import { fetchHomePatrols } from '../../../../actions/dataAction';
 class NestedListItems extends Component {
 
     componentWillMount() {
+        console.log(this.props)
         this.props.fetchHomePatrols()
     }
     componentDidMount() {
