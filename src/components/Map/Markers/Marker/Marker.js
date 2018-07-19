@@ -4,33 +4,34 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectedMarker } from '../../../../actions/markerAction';
 
-import { activeMarker,defaultMarker,statusOkMarker } from './allMarkers'
+import { activeMarker, defaultMarker, statusOkMarker } from './allMarkers'
 
 class Marker extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             selected: false
         }
         this.marker = null;
     }
-    
+
 
     _onClick = () => {
         //Cambia el estado del marcador cuando se hace click
         //Si ya esta seleccionado.
         if (this.state.selected) {
-            return this.setState({selected:false});
-        } 
+            this.props.selectedMarker(null);
+            return this.setState({ selected: false });
+        }
         //Si no ha sido seleccionado
         else {
-            this.props.onClick(this.props.homeId);
             this.props.selectedMarker(this.props.homeId);
             return this.setState({ selected: true });
         }
     }
 
     componentDidMount() {
+
         //Inicializa los marcadores
         let markerIcon;
         if (this.props.status === "actividad") {
@@ -52,15 +53,27 @@ class Marker extends Component {
         this.props.mymap.addLayer(this.marker);
     }
 
+    shouldComponentUpdate(){
+        if(this.props.selectedMarkerId === this.props.homeId){
+            return true;
+        }
+        else if(this.state.selected){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     componentDidUpdate(prevProps) {
         console.log('update');
         const changeStatusMarker = () => {
-            if(this.props.homeId === this.props.lastSelectedMarker && this.state.selected){
+            if (this.props.homeId === this.props.selectedMarkerId && this.state.selected) {
                 this.marker.setIcon(activeMarker);
             } else {
-                if(this.state.selected) this.setState({selected:false});
-                if(this.props.status === prevProps.status && this.state.selected) return //console.log('same status');
-                if(this.props.status === "actividad") return this.marker.setIcon(statusOkMarker);
+                if (this.state.selected) this.setState({ selected: false });
+                if (this.props.status === prevProps.status && this.state.selected) return //console.log('same status');
+                if (this.props.status === "actividad") return this.marker.setIcon(statusOkMarker);
                 else if (this.props.status === "inactividad") return this.marker.setIcon(defaultMarker);
                 else return this.marker.setIcon(defaultMarker);
             }
@@ -77,11 +90,13 @@ class Marker extends Component {
 }
 
 Marker.propTypes = {
-    selectedMarker: PropTypes.string
+    selectedMarkerId: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    selectedMarker: state.markers.selectedMarker
-});
+const mapStateToProps = state => {
+    return ({
+        selectedMarkerId: state.markers.selectedMarker
+    })
+};
 
 export default connect(mapStateToProps, { selectedMarker })(Marker);

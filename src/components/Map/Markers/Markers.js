@@ -52,10 +52,7 @@ class Markers extends Component {
     }
 
     //Recibe que marker fue clickeado por última vez
-    _onChildClicked = (childKey) => {
-        this.setState({lastSelectedMarker: childKey});
-    }
-
+  
     _errData = (err) => {
         console.log('error');
         console.log(err);
@@ -83,7 +80,7 @@ class Markers extends Component {
                 const address = marker.address;
 
                 return (
-                    <Marker key={key} lastSelectedMarker={this.state.lastSelectedMarker} onClick={this._onChildClicked} lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
+                    <Marker key={key} onClick={this._onChildClicked} lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
                 );
             });
         }

@@ -1,7 +1,8 @@
 import { SELECTED_MARKER } from '../actions/types';
 
 const initialState = {
-    selectedMarker: null
+    selectedMarker: null,
+    dummy: 'hola'
 }
 
 export default function (state = initialState, action) {
