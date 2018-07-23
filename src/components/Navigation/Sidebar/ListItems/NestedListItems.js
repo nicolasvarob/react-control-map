@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 
 import ListItem from './ListItem';
 import { fetchHomePatrols } from '../../../../actions/dataAction';
+import { selectedMarker } from '../../../../actions/markerAction';
 
 class NestedListItems extends Component {
 
     componentWillMount() {
-        console.log(this.props)
-        this.props.fetchHomePatrols()
     }
-    componentDidMount() {
+
+    componentDidUpdate() {
+        this.props.fetchHomePatrols(this.props.selectedMarkerId);
+        console.log(this.props.items);
     }
 
     render() {
@@ -40,11 +42,13 @@ class NestedListItems extends Component {
 
 NestedListItems.propTypes = {
     fetchHomePatrols: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    selectedMarkerId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-    items: state.patrols.homePatrols
+    items: state.patrols.homePatrols,
+    selectedMarkerId: state.markers.selectedMarker
 });
 
-export default connect(mapStateToProps, { fetchHomePatrols })(NestedListItems);
+export default connect(mapStateToProps, { fetchHomePatrols, selectedMarker })(NestedListItems);

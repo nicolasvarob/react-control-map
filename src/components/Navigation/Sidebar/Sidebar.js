@@ -6,7 +6,7 @@ const sidebar = (props) => {
     return (
         <React.Fragment>
             <SideDrawer />
-            {/* <NestedSideDrawer /> */}
+            <NestedSideDrawer visible={props.markerIsSelected}/>
         </React.Fragment>
     );
 };

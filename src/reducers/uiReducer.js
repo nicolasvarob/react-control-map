@@ -1,7 +1,8 @@
 import { SIDEDRAWER_OPEN } from '../actions/types';
 
 const initialState = {
-    sidedrawerToggle: false
+    sidedrawerToggle: false,
+    nestedSidedrawerToggle: false
 }
 
 export default function (state = initialState, action) {

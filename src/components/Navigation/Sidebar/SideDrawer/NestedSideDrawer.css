@@ -1,22 +1,28 @@
-.nested-side-drawer{
-    position:fixed;
+.nested-side-drawer {
+    position: fixed;
     z-index: 1100;
-    height:100%;
-    top:0;
-    right:0;
+    height: 100%;
+    top: 0;
+    right: 0;
     background: #FFF;
-    width:30%;
+    width: 33%;
     transform: translateX(100%);
     transition: transform 0.3s ease-in;
-    box-shadow: -1px 0px 2px 1px #aaaaaa;        
+    box-shadow: -1px 0px 2px 1px #aaaaaa;
 }
 
 .nested-side-drawer.open {
     transform: translateX(0);
 }
 
-@media (max-width: 1200px){
-    .nested-side-drawer{
-        width:35%;
+@media (max-width: 1200px) {
+    .nested-side-drawer {
+        width: 38%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nested-side-drawer {
+        max-width: 350px;
     }
 }

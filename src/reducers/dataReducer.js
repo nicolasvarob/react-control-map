@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
                 return b.timestamp - a.timestamp
             });
             return {
-                patrols: nextState.slice(0, 10)
+                homePatrols: nextState.slice(0, 10)
             };
         }
         default:

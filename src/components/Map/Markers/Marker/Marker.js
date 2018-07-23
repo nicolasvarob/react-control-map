@@ -54,6 +54,8 @@ class Marker extends Component {
     }
 
     shouldComponentUpdate(){
+        //TODO 
+        //SAcar esto mala practica
         if(this.props.selectedMarkerId === this.props.homeId){
             return true;
         }
@@ -66,7 +68,6 @@ class Marker extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('update');
         const changeStatusMarker = () => {
             if (this.props.homeId === this.props.selectedMarkerId && this.state.selected) {
                 this.marker.setIcon(activeMarker);
@@ -82,7 +83,6 @@ class Marker extends Component {
     }
 
     render() {
-
         return (
             <React.Fragment />
         );
@@ -92,6 +92,7 @@ class Marker extends Component {
 Marker.propTypes = {
     selectedMarkerId: PropTypes.string
 };
+
 
 const mapStateToProps = state => {
     return ({

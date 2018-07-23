@@ -5,8 +5,7 @@ import Marker from './Marker/Marker';
 
 class Markers extends Component {
     state = {
-        markers: [],
-        lastSelectedMarker: null
+        markers: []
     }
 
     //Pinta marcadores en mapa
@@ -18,7 +17,6 @@ class Markers extends Component {
             const marker = {
                 homeId: key,
                 lat: single.lat,
-                //Cambiar a lng
                 lng: single.lng,
                 status: single.status,
                 address: single.address
@@ -62,7 +60,6 @@ class Markers extends Component {
         const database = firebase.database();
         const homesRef = database.ref('homes');
         homesRef.on('value', this._getHomes, this._errData);
-        console.log('mount')
     }
 
     componentDidUpdate(prevProps) {
@@ -80,7 +77,7 @@ class Markers extends Component {
                 const address = marker.address;
 
                 return (
-                    <Marker key={key} onClick={this._onChildClicked} lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
+                    <Marker key={key}  lat={lat} lng={lng} homeId={key} status={status} mymap={this.props.mymap} address={address} />
                 );
             });
         }
