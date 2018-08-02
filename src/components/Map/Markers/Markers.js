@@ -62,9 +62,6 @@ class Markers extends Component {
         homesRef.on('value', this._getHomes, this._errData);
     }
 
-    componentDidUpdate(prevProps) {
-    }
-
     render() {
 
         if (!this.state.error) {

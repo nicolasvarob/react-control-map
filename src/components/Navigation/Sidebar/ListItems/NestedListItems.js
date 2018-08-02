@@ -9,19 +9,25 @@ import { selectedMarker } from '../../../../actions/markerAction';
 class NestedListItems extends Component {
 
     componentWillMount() {
+        this.test = 'hola';
     }
 
-    componentDidUpdate() {
-        this.props.fetchHomePatrols(this.props.selectedMarkerId);
-        console.log(this.props.items);
+    componentDidUpdate(prevProps,prevState) {
+        if(this.props.selectedMarkerId == null) return;
+        if(prevProps.selectedMarkerId === this.props.selectedMarkerId){
+            return;
+        }
+        else{
+            return this.props.fetchHomePatrols(this.props.selectedMarkerId);
+        }
     }
 
     render() {
         let items = this.props.items;
-        let itemList;
+        let itemList = [];
         if (items) {
             itemList = items.map(item => {
-                return <ListItem key={item.key} address={item.address} timestamp={item.timestamp} status={item.status} />
+                return <ListItem key={item.key} address={this.props.selectedMarkerAddress} timestamp={item.timestamp} status={item.status} />
             });
         }
         else {
@@ -43,12 +49,16 @@ class NestedListItems extends Component {
 NestedListItems.propTypes = {
     fetchHomePatrols: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
-    selectedMarkerId: PropTypes.string
+    selectedMarkerId: PropTypes.string,
+    selectedMarkerAddress: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-    items: state.patrols.homePatrols,
-    selectedMarkerId: state.markers.selectedMarker
-});
+const mapStateToProps = state => {
+    return {
+        items: state.patrols.homePatrols,
+        selectedMarkerId: state.markers.selectedMarker,
+        selectedMarkerAddress: state.markers.selectedMarkerAddress
+    }
+}
 
 export default connect(mapStateToProps, { fetchHomePatrols, selectedMarker })(NestedListItems);

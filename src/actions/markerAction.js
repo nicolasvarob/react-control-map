@@ -1,8 +1,9 @@
 import { SELECTED_MARKER } from './types';
 
-export const selectedMarker = (homeId) => dispatch => { 
+export const selectedMarker = (homeId,homeAddress) => dispatch => { 
     dispatch({
         type: SELECTED_MARKER,
-        id: homeId
+        id: homeId,
+        homeAddress: homeAddress
     });
 }

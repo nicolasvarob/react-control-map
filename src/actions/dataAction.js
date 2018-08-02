@@ -26,22 +26,24 @@ export const fetchPatrols = () => async (dispatch) => {
 
 //TODO
 //Finalizar eventos para fetch home patrols
-export const fetchHomePatrols = (homeId) => async dispatch => {
-    homesRef.child(homeId + '/patrols').orderByKey().limitToLast(10).on('child_added', snapshot => {
-        console.log('fetch homes')
-        console.log(snapshot)
-        if (snapshot.val() == null) {
+export const fetchHomePatrols = (homeId) => async (dispatch) => {
+    console.log('dispatch')
+    homesRef.child(homeId + '/patrols').orderByKey().limitToLast(10).on('value', snapshot => {
+        if (snapshot.val() == null || snapshot.val() === 'undefined') {
             return console.log('no hay patrullas');
         }
         snapshot.forEach(childSnapshot => {
             const patrolId = childSnapshot.val();
             patrolsRef.child(patrolId).once('value', snap => {
+                if (snap.val() == null) {
+                    return console.log('patrulla no existe');
+                }
                 const singlePatrol = snap.val();
                 const payload = {
                     status: singlePatrol.status,
                     timestamp: singlePatrol.timestamp,
-                    key: patrolId.key
-                }
+                    key: patrolId,
+                };
                 dispatch({
                     type: FETCH_HOME_PATROLS,
                     payload: payload
@@ -49,5 +51,5 @@ export const fetchHomePatrols = (homeId) => async dispatch => {
             });
         });
     }, err => console.log(err));
-
 }
+

@@ -25,7 +25,7 @@ class Marker extends Component {
         }
         //Si no ha sido seleccionado
         else {
-            this.props.selectedMarker(this.props.homeId);
+            this.props.selectedMarker(this.props.homeId,this.props.address);
             return this.setState({ selected: true });
         }
     }

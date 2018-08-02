@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
                 return b.timestamp - a.timestamp
             });
             return {
-                patrols: nextState.slice(0, 10)
+                ...state, patrols: nextState.slice(0, 10)
             };
         }
         case FETCH_HOME_PATROLS: {
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
                 return b.timestamp - a.timestamp
             });
             return {
-                homePatrols: nextState.slice(0, 10)
+                ...state, homePatrols: nextState.slice(0, 10)
             };
         }
         default:
