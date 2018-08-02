@@ -27,7 +27,6 @@ export const fetchPatrols = () => async (dispatch) => {
 //TODO
 //Finalizar eventos para fetch home patrols
 export const fetchHomePatrols = (homeId) => async (dispatch) => {
-    console.log('dispatch')
     homesRef.child(homeId + '/patrols').orderByKey().limitToLast(10).on('value', snapshot => {
         if (snapshot.val() == null || snapshot.val() === 'undefined') {
             return console.log('no hay patrullas');
@@ -46,7 +45,8 @@ export const fetchHomePatrols = (homeId) => async (dispatch) => {
                 };
                 dispatch({
                     type: FETCH_HOME_PATROLS,
-                    payload: payload
+                    payload: payload,
+                    id: homeId
                 });
             });
         });

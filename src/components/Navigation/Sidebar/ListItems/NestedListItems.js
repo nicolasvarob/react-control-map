@@ -8,9 +8,6 @@ import { selectedMarker } from '../../../../actions/markerAction';
 
 class NestedListItems extends Component {
 
-    componentWillMount() {
-        this.test = 'hola';
-    }
 
     componentDidUpdate(prevProps,prevState) {
         if(this.props.selectedMarkerId == null) return;
@@ -23,6 +20,8 @@ class NestedListItems extends Component {
     }
 
     render() {
+        //TODO
+        //Arreglar render de item list
         let items = this.props.items;
         let itemList = [];
         if (items) {
