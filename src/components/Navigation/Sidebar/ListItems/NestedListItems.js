@@ -20,8 +20,6 @@ class NestedListItems extends Component {
     }
 
     render() {
-        //TODO
-        //Arreglar render de item list
         let items = this.props.items;
         let itemList = [];
         if (items) {
