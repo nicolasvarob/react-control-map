@@ -13,7 +13,6 @@ class NestedListItems extends Component {
             currentAddress: null,
             currentItems: []
         }
-        this.itemList;
     }
 
 
@@ -34,8 +33,9 @@ class NestedListItems extends Component {
 
     render() {
         let items = this.props.items;
+        let itemList;
         if (items) {
-            this.itemList = items.map(item => {
+            itemList = items.map(item => {
                 return <ListItem key={item.key} address={this.state.currentAddress} timestamp={item.timestamp} status={item.status} />
             });
         }
@@ -45,7 +45,7 @@ class NestedListItems extends Component {
                     <li><h2>Título 2</h2></li>
                 </ul>
                 <ul>
-                    {this.itemList}
+                    {itemList}
                 </ul>
             </div>
         );

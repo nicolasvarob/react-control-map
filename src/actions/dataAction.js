@@ -52,4 +52,3 @@ export const fetchHomePatrols = (homeId) => async (dispatch) => {
         });
     }, err => console.log(err));
 }
-

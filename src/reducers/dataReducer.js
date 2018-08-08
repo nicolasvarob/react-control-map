@@ -1,4 +1,4 @@
-import { FETCH_PATROLS, FETCH_HOME_PATROLS } from '../actions/types';
+import { FETCH_PATROLS, FETCH_HOME_PATROLS, RESET_HOME_PATROLS } from '../actions/types';
 
 const initialState = {
     patrols: [],
@@ -18,6 +18,7 @@ export default function (state = initialState, action) {
             };
         }
         case FETCH_HOME_PATROLS: {
+
             let nextState;
             //Avoids data from diferent homes to overlap
             if (state.currentHome !== action.id) {
@@ -32,6 +33,13 @@ export default function (state = initialState, action) {
             return {
                 ...state, homePatrols: nextState, currentHome: action.id
             };
+        }
+
+        //Reset homePatrols when marker is null
+        case RESET_HOME_PATROLS: {
+            return {
+                ...state, homePatrols: []
+            }
         }
         default:
             return state;
