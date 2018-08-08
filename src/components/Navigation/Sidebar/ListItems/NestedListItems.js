@@ -33,8 +33,6 @@ class NestedListItems extends Component {
     }
 
     render() {
-        //TODO
-        //Arreglar render de item list
         let items = this.props.items;
         if (items) {
             this.itemList = items.map(item => {

@@ -19,6 +19,7 @@ export default function (state = initialState, action) {
         }
         case FETCH_HOME_PATROLS: {
             let nextState;
+            //Avoids data from diferent homes to overlap
             if (state.currentHome !== action.id) {
                 nextState = [action.payload];
             }
