@@ -1,6 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import DrawerToggleButton from '../Sidebar/DrawerToggleButton';
+import { NavLink } from 'react-router-dom';
 
 const navbar = props => (
     <header>
@@ -9,7 +10,10 @@ const navbar = props => (
             <div>
                 <ul>
                     <li>
-                        <DrawerToggleButton click={props.drawerClickHandler}/>
+                        <DrawerToggleButton click={props.drawerClickHandler} />
+                    </li>
+                    <li>
+                        <NavLink to="/reporting">Reportes</NavLink>
                     </li>
                 </ul>
             </div>

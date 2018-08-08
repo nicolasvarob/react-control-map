@@ -7,14 +7,27 @@ import { fetchHomePatrols } from '../../../../actions/dataAction';
 import { selectedMarker } from '../../../../actions/markerAction';
 
 class NestedListItems extends Component {
+    constructor() {
+        super();
+        this.state = {
+            currentAddress: null,
+            currentItems: []
+        }
+        this.itemList;
+    }
 
 
-    componentDidUpdate(prevProps,prevState) {
-        if(this.props.selectedMarkerId == null) return;
-        if(prevProps.selectedMarkerId === this.props.selectedMarkerId){
+    componentDidUpdate(prevProps, prevState) {
+        //Deja almacenado la última address seleccionada
+        //Evaluar si traspasar a redux
+        if (this.props.selectedMarkerAddress && this.state.currentAddress !== this.props.selectedMarkerAddress) {
+            this.setState({ currentAddress: this.props.selectedMarkerAddress })
+        }
+        if (this.props.selectedMarkerId == null) return;
+        if (prevProps.selectedMarkerId === this.props.selectedMarkerId) {
             return;
         }
-        else{
+        else {
             return this.props.fetchHomePatrols(this.props.selectedMarkerId);
         }
     }
@@ -23,14 +36,10 @@ class NestedListItems extends Component {
         //TODO
         //Arreglar render de item list
         let items = this.props.items;
-        let itemList = [];
         if (items) {
-            itemList = items.map(item => {
-                return <ListItem key={item.key} address={this.props.selectedMarkerAddress} timestamp={item.timestamp} status={item.status} />
+            this.itemList = items.map(item => {
+                return <ListItem key={item.key} address={this.state.currentAddress} timestamp={item.timestamp} status={item.status} />
             });
-        }
-        else {
-            itemList = "loading";
         }
         return (
             <div>
@@ -38,7 +47,7 @@ class NestedListItems extends Component {
                     <li><h2>Título 2</h2></li>
                 </ul>
                 <ul>
-                    {itemList}
+                    {this.itemList}
                 </ul>
             </div>
         );
