@@ -1,0 +1,11 @@
+.form-wrapper{
+    height:400px;
+}
+
+.left-image-container{
+    background-color:white;
+    background:url('form-background.jpeg') no-repeat 5% 95% ;
+    background-size: 900px auto;
+
+    height:100%;
+}
