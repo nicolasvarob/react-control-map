@@ -26,43 +26,24 @@ function SignUpForm(props) {
     const { isSubmitting, errors, handleChange, handleSubmit } = props
 
     return (
-        <div className="positional-wrapper">
-            <div className="container">
-                <div className="row form-wrapper">
-                    <div className="col">
-                        <div className="left-image-container">
-                            <h1>TEST</h1>
-                        </div>
+        <div className="row form-wrapper">
+            <div className="col no-padding-left">
+                <div className="left-image-container">
+                </div>
+            </div>
+            <div className="col-8">
+                <div className="content">
+                    <h1> <span className="lighter">Bienvenido a</span> Security</h1>
+                    <p>Para acceder al panel de monitoreo, por favor ingresa tus datos. </p>
+                </div>
+                <div className="form">
+                    <div className="inputs-wrapper">
+                        <input className="control" name="email" type="email" onChange={handleChange} />
+                        <div className="form-field-error">{errors.email}</div>
+                        <input className="control" name="password" type="password" onChange={handleChange} />
+                        <div className="form-field-error">{errors.password}</div>
                     </div>
-                    <div className="col-9">
-                        <div className="form">
-                            <label className="form-field" htmlFor="email">
-                                <span>E-mail:</span>
-                                <input name="email" type="email" onChange={handleChange} />
-                            </label>
-                            <div className="form-field-error">{errors.email}</div>
-
-                            <label className="form-field" htmlFor="password">
-                                <span>Password:</span>
-                                <input name="password" type="password" onChange={handleChange} />
-                            </label>
-                            <div className="form-field-error">{errors.password}</div>
-
-                            <label className="form-field" htmlFor="passwordConfirmation">
-                                <span>Confirm password:</span>
-                                <input name="passwordConfirmation" type="password" onChange={handleChange} />
-                            </label>
-                            <div className="form-field-error">{errors.passwordConfirmation}</div>
-
-                            <label className="form-field" htmlFor="consent">
-                                <span>Consent:</span>
-                                <input name="consent" type="checkbox" onChange={handleChange} />
-                            </label>
-                            <div className="form-field-error">{errors.consent}</div>
-
-                            <button onClick={handleSubmit}>{isSubmitting ? 'Loading' : 'Sign Up'}</button>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-light" onClick={handleSubmit}>{isSubmitting ? 'Loading' : 'Login'}</button>
                 </div>
             </div>
         </div>

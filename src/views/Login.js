@@ -6,8 +6,10 @@ import './Login.css';
 class Login extends Component {
     render() {
         return (
-            <div className="login-container">
-                <LoginForm/>
+            <div className="container-fluid">
+                <div className="login-container">
+                    <LoginForm />
+                </div>
             </div>
         );
     }
